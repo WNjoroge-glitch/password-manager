@@ -1,0 +1,40 @@
+<%-include('partials/header')%>
+<body>
+   
+<div class = "container">
+    <div class="details-list">
+       
+        
+    <% for(detail of details){%>
+        
+        <h1><%= detail.name %></h1>
+        <li>Username:<%= detail.username%></li>
+        <li>URL:<%= detail.url%></li>
+        
+        <li>
+            <input type ="password" id="password-input" value = <%= password %> class="signup-input">
+        </li>
+           
+            <i class="far fa-eye" id="password"></i>
+        
+        
+
+<%}%>
+
+</div>
+</div>
+<script>
+    const button = document.querySelector("#password")
+    const input = document.querySelector('#password-input')
+  button.addEventListener("click", ()=>{
+      if(input.type ==="password"){
+         input.type="text"
+      } else{
+          input.type="password"
+      }
+      
+  }) 
+</script>
+
+</body>
+</html>

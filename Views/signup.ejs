@@ -1,0 +1,24 @@
+<%-include('partials/header')%>
+<body>
+    
+    
+    <div class="container">
+    
+        
+    <form action="/signup" method="POST" class="signup-form">
+        <h1 class="heading">sign up</h1>
+        <label>Email Address
+            <input type="email" name = "email" required class="signup-input"/>
+        </label>
+        <label>Password
+            <input type="password" name = "password" required class="signup-input"/>
+        </label>
+        <label>Confirm Password
+            <input type="password" name = "confirmpassword" required class="signup-input"/>
+        </label>
+        <input type="submit" value = "Sign Up" class="links submit-btn"/>
+        <a href='/login'>Already have an account?Login</a>
+    </form>
+</div>
+</body>
+</html>

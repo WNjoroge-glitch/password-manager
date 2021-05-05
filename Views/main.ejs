@@ -1,0 +1,31 @@
+
+<%-include('partials/header')%>
+<body>
+   
+    
+    <div class="password-container">
+        <a href='/logout'>Logout</a>
+     <h1 class="heading">Your Passwords</h1>
+     
+    <% for (result of results){%>
+        <div class="passwords">
+        <div class="password-list">
+           
+                <li><a href='/main/<%=result.id%>''><%=result.name%></a></li>
+            
+<form action='/delete/<%=result.id%>' method="POST">
+        <input type="submit" value="X" class="delete">
+        
+       
+       </form>
+      
+    </div>
+</div>
+<%}%>
+
+<a href="/form">
+    <i class="fas fa-plus fa-3x"></i>
+</a>
+</div>
+</body>
+    </html>
