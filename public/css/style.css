@@ -5,16 +5,19 @@
 }
 body{
     background-color:white;
+    font-family: 'Abhaya Libre', serif;
 }
 
 .main-container{
     display:flex;
+    width:100%;
     height: 100vh;
     justify-content: space-between;
+    background: rgb(28, 189, 197,.5);
 
 }
 .logo{
-    width:40vw;
+    width:50vw;
 }
 .logo img {
     width:100%;
@@ -51,24 +54,32 @@ body{
     display:flex;
     justify-content: center;
     align-items: center;
-    background-image: url('/Images/Mataura.png')center no-repeat;
-    background-size:cover; 
+   
     height:100vh;
     width:100%;
-    background: linear-gradient(90deg, hsla(216, 83%, 68%, 1) 0%, hsla(300, 25%, 5%, 1) 50%, hsla(222, 33%, 26%, 1) 55%, hsla(0, 0%, 100%, 1) 100%);
+    position: relative;
+   /* background:rgb(0, 0, 0,.8); */
+    /* background:#C6E2E9; */
+  
 }
 .signup-form{
-    background-color:#6BA0F1;
+    
     display: flex;
+    
+    
+    background: rgba(255, 255, 255, .8);
     flex-direction:column;
     margin:50px;
     min-height: 100vh;
     margin:0;
     width:600px;
+    z-index: 1000;
+    font-size:20px;
 }
 
 .signup-input{
-    background-color: transparent;
+    background-color:inherit;
+    
     border:none;
     outline:none;
     border-bottom:1px solid black;
@@ -77,14 +88,18 @@ body{
 } 
 .password-container{
      min-height: 100vh;
-     
-     background: linear-gradient(270deg, hsla(216, 83%, 68%, 1) 0%, hsla(348, 67%, 88%, 1) 50%, hsla(300, 25%, 5%, 1) 100%);
+     background: rgba(255, 255, 255, .8);
+    backdrop-filter: blur(10px);
+     /* background:rgba(28, 189, 197, 0.6); */
+    width:500px;
+    z-index: 1000;
      color:black;
-     width:100%;
-}
-
-.password-list{
     
+}
+.delete{
+    transition: submit ease 2s;
+}
+.password-list{
     display: block;
     margin:0 auto;
     display: flex;
@@ -96,31 +111,70 @@ body{
     padding:10px 20px;
     color:white;
     width:300px;
-    
-    
+    border-bottom: 1px solid black;
 }
+
 .password-list a{
     text-decoration: none;
-    color:hsla(216, 83%, 68%, 1);
+    color:black;
+    width:100%;
+    font-size:20px;
     
+}
+.password-list a:hover{
+    color:#1CBDC5;
+}
+.fa-user-circle{
+position:absolute;
+right:0;
+top:0;
+z-index: 1000;
+
+}
+.modal{
+    position:absolute;
+    right:10px;
+    z-index: 1000;
+   top:50px;
+   background-color:white;
+    width:200px;
+    height:100px;
+    border-radius:5px;
+    display:none;
+}
+.modal a{
+    text-decoration: none;
+    text-align:center;
+    margin:10px 0;
+    
+}
+.shape{
+    position:absolute;
+    width: 100%;;
+    top: .5rem;
+    left: .5rem;
+    height:100%;
+
 }
 .details-list{
     list-style: none;
-    background-color: #6BA0F1;
+    background: rgba(255, 255, 255, .8);
+    backdrop-filter: blur(10px);
     border-radius: 5px;
     text-align: center;
     width:300px;
     height:300px;
     
 }
-/* .details-list li{
+.details-list li{
     margin-top:5px;
-} */
+}
 .details-list h1{
     margin:10px 0;
 }
 .passwords{
     position:relative;
+   
 }
 .fa-plus{
     position:absolute;
@@ -143,6 +197,13 @@ body{
     
 }
 @media (max-width:760px) {
+    .main-container{
+        flex-direction: column-reverse;
+        
+    }
+    .logo{
+        width:100vw;
+    }
     .password-container{
        display: flex;
         flex-direction: column;

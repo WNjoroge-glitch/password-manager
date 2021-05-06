@@ -2,17 +2,18 @@
 <body>
    
 <div class = "container">
+    <img class="shape" src="/Images/Vorderrhein.png"/>
     <div class="details-list">
        
         
     <% for(detail of details){%>
         
-        <h1><%= detail.name %></h1>
+        <h1 class="heading"><%= detail.name %></h1>
         <li>Username:<%= detail.username%></li>
         <li>URL:<%= detail.url%></li>
         
         <li>
-            <input type ="password" id="password-input" value = <%= password %> class="signup-input">
+            <input type ="password" id="password-input" class="signup-input" value = <%= password %> />
         </li>
            
             <i class="far fa-eye" id="password"></i>

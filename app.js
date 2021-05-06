@@ -39,11 +39,9 @@ app.set('view engine','ejs')
 app.use((req,res,next)=>{
     if(req.session.userId === undefined){
         res.locals.isLoggedIn = false;
-        console.log("you are not logged in")
-        //res.redirect('/')
-     } else {
-        console.log("you are logged in");
-        res.locals.isLoggedIn = true
+    } else {
+    res.locals.isLoggedIn = true
+        res.locals.email = req.session.email
         }
      next()
 })
@@ -60,9 +58,7 @@ app.get('/main',(req,res)=>{
             if(error){
                 console.log(error)
             } else {
-              console.log(`userId:${req.session.userId}`)
-            
-            res.render('main', {results:result})
+              res.render('main', {results:result})
             }
             
             
@@ -145,12 +141,9 @@ app.post('/login', (req,res) =>{
         bcrypt.compare(password,results[0].password,(error,isEqual) =>{
            if(isEqual){
                  req.session.userId = results[0].id
-                 
-                console.log(results[0].id)
-                 console.log("correct password")
+                 req.session.email = results[0].email
                  res.redirect('/main')
               } else {
-                 console.log("incorrect password")
                  res.redirect('/login')
               }
             })
@@ -169,7 +162,7 @@ app.get('/main/:id',(req,res) => {
     
         const sqlQuery = `SELECT * from user_details WHERE id = ${id};`
         db.query(sqlQuery,(error,result) => {
-            const secretKey = process.env.ENCRYPTION_KEY
+            const secretKey =process.env.ENCRYPTION_KEY
             const password = result[0].password_name
             const decrypt = crypto.AES.decrypt(password,secretKey)
             const decryptedPassword = decrypt.toString(crypto.enc.Utf8)
@@ -193,7 +186,7 @@ app.post('/delete/:id',(req,res)=>{
             console.log(error)
         }
         else {
-            console.log("successful")
+           
             res.redirect('/main')
         }
     })
@@ -201,7 +194,7 @@ app.post('/delete/:id',(req,res)=>{
 
 app.get('/logout',(req,res)=>{
     req.session.destroy((error) =>{
-        console.log("You are logged out")
+        
         res.redirect('/')
      })
 })
