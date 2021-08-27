@@ -21,7 +21,7 @@ const db = mysql.createConnection({
     host:'localhost',
     user:'root',
     port:'3306',
-    password:'sqlpassword1#',
+    password:'sql1pass',
     database:'password_manager'
 })
 
@@ -87,9 +87,9 @@ app.post('/form',(req,res)=>{
    const encryptedPassword = crypto.AES.encrypt(password,secretKey).toString()
 
 
-    const sqlQuery = 'INSERT INTO user_details(name,username,url,password_name) VALUES(?,?,?,?);'
+    const sqlQuery = 'INSERT INTO user_details(name,username,url,password,user_id) VALUES(?,?,?,?,?);'
 
-    db.query(sqlQuery,[name,user,url,encryptedPassword],(error,result) =>{
+    db.query(sqlQuery,[name,user,url,encryptedPassword,req.session.userId],(error,result) =>{
         if(error){
             console.log(error)
         } else{
@@ -162,13 +162,21 @@ app.get('/main/:id',(req,res) => {
     
         const sqlQuery = `SELECT * from user_details WHERE id = ${id};`
         db.query(sqlQuery,(error,result) => {
-            const secretKey =process.env.ENCRYPTION_KEY
-            const password = result[0].password_name
-            const decrypt = crypto.AES.decrypt(password,secretKey)
-            const decryptedPassword = decrypt.toString(crypto.enc.Utf8)
-           
+            if(error){
+                console.log(error)
+            } else {
+                const secretKey =process.env.ENCRYPTION_KEY
+               
+                const password = result[0].password
+              
+                const decrypt = crypto.AES.decrypt(password,secretKey)
+                const decryptedPassword = decrypt.toString(crypto.enc.Utf8)
+                
+               
+                
+                res.render('details', {details:result,password:decryptedPassword})
+            }
             
-            res.render('details', {details:result,password:decryptedPassword})
         })
 
     } else {
